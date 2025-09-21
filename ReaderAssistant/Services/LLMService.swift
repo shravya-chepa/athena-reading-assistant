@@ -36,7 +36,7 @@ class LLMService {
         let body: [String: Any] = [
             "model": "llama-3.1-8b-instant",
             "messages": [
-                ["role": "system", "content": "You are a helpful voice assistant helping with reading books. Limit your responses to four sentences unless absolutely necessary."],
+                ["role": "system", "content": "You are a helpful voice assistant helping with reading books and literature. Keep your responses concise - to four sentences unless absolutely necessary. If the prompt is not literature-related, give a graceful response saying you can't assist with that."],
                 ["role": "user", "content": prompt]
             ]
         ]

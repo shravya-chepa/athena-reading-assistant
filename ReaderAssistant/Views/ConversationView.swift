@@ -11,19 +11,37 @@ struct ConversationView: View {
     @ObservedObject var viewModel: VoiceAssistantViewModel
     
     var body: some View {
-        VStack(spacing:10) {
+        VStack(spacing:12) {
             ScrollView{
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(Array(viewModel.conversation.enumerated()), id: \.offset) {
                         _, entry in
-                        Text("\(entry.speaker): \(entry.text)")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
+                        HStack {
+                            if entry.speaker == "You" {
+                                Spacer()
+                                Text(entry.text)
+                                    .padding()
+                                    .background(Color.blue.opacity(0.8))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(12)
+                                    .frame(maxWidth: 250, alignment: .trailing)
+                            } else {
+                                Text(entry.text)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.3))
+                                    .foregroundColor(.primary)
+                                    .cornerRadius(12)
+                                    .frame(maxWidth: 250, alignment: .leading)
+                            Spacer()
+                            }
+                        }
+                        .padding(.horizontal)
                     }
                 }
+                .padding(.top, 10)
             }
             
-            Text(viewModel.transcript.isEmpty ? "Press the mic" : viewModel.transcript)
+            Text(viewModel.transcript.isEmpty ? "Press the mic and start speaking" : viewModel.transcript)
 //                            .padding()
             
             Button(action: {

@@ -18,20 +18,33 @@ struct MainView: View {
     }
     
     var body: some View {
-        TabView {
-            // conversation tab
-            ConversationView(viewModel: viewModel)
-                .tabItem {
-                    Label("Chat", systemImage: "mic.fill")
+        NavigationStack {
+            TabView {
+                // conversation tab
+                ConversationView(viewModel: viewModel)
+                    .tabItem {
+                        Label("Chat", systemImage: "mic.fill")
+                    }
+                
+                // history tab
+                HistoryView(storageVM: storageVM)
+                    .tabItem {
+                        Label("History", systemImage: "book.fill")
+                    }
+            }
+            .navigationTitle("Athena")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                // placeholder for future menu/settings button
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        // todo: menu section
+                    }) {
+                        Image(systemName: "ellipsis.circle")
+                    }
                 }
-            
-            // history tab
-            HistoryView(storageVM: storageVM)
-                .tabItem {
-                    Label("History", systemImage: "book.fill")
-                }
+            }
         }
-        
     }
 }
 

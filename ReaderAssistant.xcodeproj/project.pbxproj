@@ -13,11 +13,14 @@
 		7C810ED32E805E9C00AB12AC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7C810ED22E805E9C00AB12AC /* FirebaseAuth */; };
 		7C810ED52E805E9C00AB12AC /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7C810ED42E805E9C00AB12AC /* FirebaseCore */; };
 		7C810ED72E805E9C00AB12AC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7C810ED62E805E9C00AB12AC /* FirebaseFirestore */; };
+		7C8C098E2E808DFA00B04515 /* Porcupine in Frameworks */ = {isa = PBXBuildFile; productRef = 7C8C098D2E808DFA00B04515 /* Porcupine */; };
+		7C8C09902E808E3500B04515 /* Athena_en_ios_v3_0_0.ppn in Resources */ = {isa = PBXBuildFile; fileRef = 7C8C098F2E808E3500B04515 /* Athena_en_ios_v3_0_0.ppn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7C669ABC2E7F9D2400120DE8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		7C810ECD2E805D5200AB12AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C8C098F2E808E3500B04515 /* Athena_en_ios_v3_0_0.ppn */ = {isa = PBXFileReference; lastKnownFileType = file; path = Athena_en_ios_v3_0_0.ppn; sourceTree = "<group>"; };
 		7CDB99B12E7EF72C00858B6E /* ReaderAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReaderAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -48,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C810ED12E805E9C00AB12AC /* FirebaseAnalytics in Frameworks */,
+				7C8C098E2E808DFA00B04515 /* Porcupine in Frameworks */,
 				7C810ED72E805E9C00AB12AC /* FirebaseFirestore in Frameworks */,
 				7C810ED52E805E9C00AB12AC /* FirebaseCore in Frameworks */,
 				7C810ED32E805E9C00AB12AC /* FirebaseAuth in Frameworks */,
@@ -64,6 +68,7 @@
 				7CDB99B32E7EF72C00858B6E /* ReaderAssistant */,
 				7CDB99B22E7EF72C00858B6E /* Products */,
 				7C810ECD2E805D5200AB12AC /* GoogleService-Info.plist */,
+				7C8C098F2E808E3500B04515 /* Athena_en_ios_v3_0_0.ppn */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +104,7 @@
 				7C810ED22E805E9C00AB12AC /* FirebaseAuth */,
 				7C810ED42E805E9C00AB12AC /* FirebaseCore */,
 				7C810ED62E805E9C00AB12AC /* FirebaseFirestore */,
+				7C8C098D2E808DFA00B04515 /* Porcupine */,
 			);
 			productName = ReaderAssistant;
 			productReference = 7CDB99B12E7EF72C00858B6E /* ReaderAssistant.app */;
@@ -130,6 +136,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7C810ECF2E805E9C00AB12AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7C8C098C2E808DF900B04515 /* XCRemoteSwiftPackageReference "porcupine" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7CDB99B22E7EF72C00858B6E /* Products */;
@@ -148,6 +155,7 @@
 			files = (
 				7C669ABD2E7F9D2400120DE8 /* Config.xcconfig in Resources */,
 				7C810ECE2E805D5200AB12AC /* GoogleService-Info.plist in Resources */,
+				7C8C09902E808E3500B04515 /* Athena_en_ios_v3_0_0.ppn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +304,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReaderAssistant/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Athena;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"We need microphone access to capture your questions\"";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "\"We need speech recognition to understand your questions\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -331,6 +340,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReaderAssistant/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Athena;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"We need microphone access to capture your questions\"";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "\"We need speech recognition to understand your questions\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -387,6 +397,14 @@
 				minimumVersion = 12.3.0;
 			};
 		};
+		7C8C098C2E808DF900B04515 /* XCRemoteSwiftPackageReference "porcupine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Picovoice/porcupine.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -409,6 +427,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7C810ECF2E805E9C00AB12AC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		7C8C098D2E808DFA00B04515 /* Porcupine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C8C098C2E808DF900B04515 /* XCRemoteSwiftPackageReference "porcupine" */;
+			productName = Porcupine;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -158,7 +158,7 @@ class VoiceAssistantViewModel: ObservableObject {
                 var questionToSave = query
                 
                 switch result.source {
-                case .dictionary(let word): 
+                case .dictionary(let word):
                     category = "word"
                     questionToSave = word
                 case .llm: category = "general"

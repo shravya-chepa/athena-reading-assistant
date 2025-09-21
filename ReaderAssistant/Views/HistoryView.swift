@@ -17,7 +17,7 @@ struct HistoryView: View {
         NavigationStack {
 
             List {
-                Section(header: Text("Words")) {
+                Section() {
                     DisclosureGroup(isExpanded: $showWords) {
                         ForEach(
                             storageVM.entries.filter { $0.category == "word" }
@@ -48,7 +48,7 @@ struct HistoryView: View {
                     }
                 }
 
-                Section(header: Text("General")) {
+                Section() {
                     DisclosureGroup(isExpanded: $showGeneral) {
                         ForEach(
                             storageVM.entries.filter {
@@ -81,36 +81,36 @@ struct HistoryView: View {
                     }
                 }
 
-                Section(header: Text("Miscellaneous")) {
-                    DisclosureGroup(isExpanded: $showMisc) {
-                        ForEach(
-                            storageVM.entries.filter { $0.category == "misc" }
-                        ) { entry in
-                            NavigationLink(
-                                destination: QAEntryDetail(entry: entry)
-                            ) {
-                                VStack(alignment: .leading) {
-                                    Text(entry.question)
-                                        .font(.headline)
-                                    Text(entry.answer)
-                                        .font(.subheadline)
-                                        .lineLimit(1)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            .swipeActions {
-                                Button(role: .destructive) {
-                                    storageVM.delete(entry: entry)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
-                        }
-                    } label: {
-                        Text("Miscellaneous")
-                            .font(.headline)
-                    }
-                }
+//                Section(header: Text("Miscellaneous")) {
+//                    DisclosureGroup(isExpanded: $showMisc) {
+//                        ForEach(
+//                            storageVM.entries.filter { $0.category == "misc" }
+//                        ) { entry in
+//                            NavigationLink(
+//                                destination: QAEntryDetail(entry: entry)
+//                            ) {
+//                                VStack(alignment: .leading) {
+//                                    Text(entry.question)
+//                                        .font(.headline)
+//                                    Text(entry.answer)
+//                                        .font(.subheadline)
+//                                        .lineLimit(1)
+//                                        .foregroundColor(.secondary)
+//                                }
+//                            }
+//                            .swipeActions {
+//                                Button(role: .destructive) {
+//                                    storageVM.delete(entry: entry)
+//                                } label: {
+//                                    Label("Delete", systemImage: "trash")
+//                                }
+//                            }
+//                        }
+//                    } label: {
+//                        Text("Miscellaneous")
+//                            .font(.headline)
+//                    }
+//                }
             }
             .navigationBarTitle("History")
         }
