@@ -12,6 +12,7 @@ class VoiceAssistantViewModel: ObservableObject {
     private let ttsService = TTSService()
     private let nlpService = NLPService()
     
+    
     @Published var transcript: String = ""
     @Published var answer: String = ""
     @Published var isListening: Bool = false
@@ -150,6 +151,16 @@ class VoiceAssistantViewModel: ObservableObject {
                 
                 // append assistant turn
                 self.conversation.append((speaker: "Assistant", text: result.answer))
+                
+                // save entry in storage
+                let category: String
+                switch result.source {
+                case .dictionary: category = "word"
+                case .llm: category = "general"
+                case .goodbye: category = "exit"
+                case .unknown: category = "misc"
+                }
+                QAStorageViewModel().addEntry(question: query, answer: result.answer, category: category)
                 
                 self.isSpeaking = true
                 self.ttsService.speak(text: self.answer) {

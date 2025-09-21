@@ -9,33 +9,23 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject private var viewModel = VoiceAssistantViewModel()
+    @StateObject private var storageVM = QAStorageViewModel()
     
     var body: some View {
-        VStack(spacing:20) {
-            ScrollView{
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(Array(viewModel.conversation.enumerated()), id: \.offset) {
-                        _, entry in
-                        Text("\(entry.speaker): \(entry.text)")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                    }
+        TabView {
+            // conversation tab
+            ConversationView(viewModel: viewModel)
+                .tabItem {
+                    Label("Chat", systemImage: "mic.fill")
                 }
-            }
             
-            Text(viewModel.transcript.isEmpty ? "Press the mic" : viewModel.transcript)
-                            .padding()
-            
-            Button(action: {
-                viewModel.toggleListening()
-            }) {
-                Image(systemName: viewModel.isListening ? "mic.fill" : "mic")
-                    .resizable()
-                    .frame(width: 50, height: 70)
-                    .padding()
-                    .foregroundColor(viewModel.isListening ? .red : .blue)
-            }
+            // history tab
+            HistoryView(storageVM: storageVM)
+                .tabItem {
+                    Label("History", systemImage: "book.fill")
+                }
         }
+        
     }
 }
 
