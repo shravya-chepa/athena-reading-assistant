@@ -11,6 +11,7 @@ import Foundation
 enum QueryType {
     case dictionary(word: String)
     case llm(prompt: String)
+    case goodbye
     case unknown
 }
 
@@ -23,7 +24,13 @@ struct NLPResult {
 
 class NLPService {
     private let dictionaryService = DictionaryService()
-    // private let llmService = LLMService()
+    private let llmService: LLMService? = {
+        let service = LLMService()
+        if service == nil {
+            print("DEBUG NLPServices: Failed to initialize LLMService (no API key?)")
+        }
+        return service
+    }()
     
     func process(query: String, completion: @escaping (NLPResult?) -> Void ) {
         let type = classifyQuery(query: query)
@@ -38,7 +45,18 @@ class NLPService {
                 completion(NLPResult(originalQuery: query, answer: definition, source: type))
             }
         case .llm(let prompt):
-            print("llm service here")
+            llmService?.send(prompt: prompt) {
+                response in
+                guard let response = response else {
+                    completion(nil)
+                    return
+                }
+                completion(NLPResult(originalQuery: query, answer: response, source: type))
+            }
+            
+        case .goodbye:
+            completion(NLPResult(originalQuery: query, answer: "Goodbye! Talk to you soon.", source: .goodbye))
+            
         case .unknown:
         completion(NLPResult(originalQuery: query, answer: "I'm not sure what you mean.", source: .unknown))
         }
@@ -61,6 +79,10 @@ class NLPService {
                     return .dictionary(word: wordPart)
                 }
             }
+        }
+        
+        if lowerQuery.contains("bye") || lowerQuery.contains("goodbye") || lowerQuery.contains("see you later") || lowerQuery.contains("stop") {
+            return .goodbye
         }
         
         // everything else -> llm
