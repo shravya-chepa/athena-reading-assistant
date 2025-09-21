@@ -11,7 +11,7 @@ struct ConversationView: View {
     @ObservedObject var viewModel: VoiceAssistantViewModel
     
     var body: some View {
-        VStack(spacing:20) {
+        VStack(spacing:10) {
             ScrollView{
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(Array(viewModel.conversation.enumerated()), id: \.offset) {
@@ -24,7 +24,7 @@ struct ConversationView: View {
             }
             
             Text(viewModel.transcript.isEmpty ? "Press the mic" : viewModel.transcript)
-                            .padding()
+//                            .padding()
             
             Button(action: {
                 viewModel.toggleListening()
@@ -36,5 +36,6 @@ struct ConversationView: View {
                     .foregroundColor(viewModel.isListening ? .red : .blue)
             }
         }
+        .padding(.bottom, 30)
     }
 }

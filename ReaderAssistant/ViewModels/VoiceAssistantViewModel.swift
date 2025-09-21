@@ -155,15 +155,19 @@ class VoiceAssistantViewModel: ObservableObject {
                 
                 // save entry in storage
                 let category: String
+                var questionToSave = query
+                
                 switch result.source {
-                case .dictionary: category = "word"
+                case .dictionary(let word): 
+                    category = "word"
+                    questionToSave = word
                 case .llm: category = "general"
                 case .goodbye: category = "exit"
                 case .unknown: category = "misc"
                 }
                 
                 self.storageVM.addEntry(
-                    question: query,
+                    question: questionToSave,
                     answer: result.answer,
                     category: category
                 )

@@ -12,14 +12,33 @@ class QAStorageViewModel: ObservableObject {
     
     @Published private(set) var entries: [QAEntry] = []
     private let storageKey = "QA_ENTRIES"
+    private let firebase = FirebaseService()
     
     init() {
         load()
+        syncFromFirebase()
+    }
+    
+    func syncFromFirebase() {
+            firebase.fetch { [weak self] remoteEntries in
+                DispatchQueue.main.async {
+                    self?.entries = remoteEntries
+                    self?.save()
+                }
+        }
     }
     
     func addEntry(question: String, answer: String, category: String) {
         let newEntry = QAEntry(question: question, answer: answer, category: category)
         entries.append(newEntry)
+        save()
+        
+        // push to firebase
+        firebase.save(entry: newEntry)
+    }
+    
+    func delete(entry: QAEntry) {
+        entries.removeAll { $0.id == entry.id }
         save()
     }
     
