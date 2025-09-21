@@ -69,7 +69,7 @@ class DictionaryService {
                     var answer = "\(entry.word): \(firstMeaning.partOfSpeech) \(firstDef.definition)"
                     
                     if let example = firstDef.example {
-                        answer += " (e.g. \(example))"
+                        answer += " (For example: \(example))"
                     }
                     
                     completion(answer)
