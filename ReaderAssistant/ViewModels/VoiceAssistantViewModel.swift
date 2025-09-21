@@ -11,7 +11,7 @@ class VoiceAssistantViewModel: ObservableObject {
     private let speechService = SpeechService()
     private let ttsService = TTSService()
     private let nlpService = NLPService()
-    
+    private let storageVM: QAStorageViewModel
     
     @Published var transcript: String = ""
     @Published var answer: String = ""
@@ -25,7 +25,8 @@ class VoiceAssistantViewModel: ObservableObject {
     // to store if the speech is already processed then we don't need to speak again
     private var hasProcessedResult: Bool = false
     
-    init() {
+    init(storageVM: QAStorageViewModel) {
+        self.storageVM = storageVM
         speechService.requestAuthorization()
     }
     
@@ -160,7 +161,12 @@ class VoiceAssistantViewModel: ObservableObject {
                 case .goodbye: category = "exit"
                 case .unknown: category = "misc"
                 }
-                QAStorageViewModel().addEntry(question: query, answer: result.answer, category: category)
+                
+                self.storageVM.addEntry(
+                    question: query,
+                    answer: result.answer,
+                    category: category
+                )
                 
                 self.isSpeaking = true
                 self.ttsService.speak(text: self.answer) {

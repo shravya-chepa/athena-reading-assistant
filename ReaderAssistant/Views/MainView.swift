@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject private var viewModel = VoiceAssistantViewModel()
+    @StateObject private var viewModel: VoiceAssistantViewModel
     @StateObject private var storageVM = QAStorageViewModel()
+    
+    init() {
+        let storage = QAStorageViewModel()
+        _storageVM = StateObject(wrappedValue: storage)
+        _viewModel = StateObject(wrappedValue: VoiceAssistantViewModel(storageVM: storage))
+    }
     
     var body: some View {
         TabView {
